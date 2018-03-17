@@ -1,27 +1,12 @@
-Welcome to the Glitch BETA
-=========================
+# Pixterest
+============
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+## Free Code Camp Pinterest Clone Project
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+[More info about the project on freeCodeCamp](https://www.freecodecamp.org/challenges/build-a-pinterest-clone)
 
-Find out more [about Glitch](https://glitch.com/about).
+Users can log in and save favourite images which are shared between all users.
 
+Any user can view the pictures saved by other users.
 
-Your Project
-------------
-
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
-
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-
-Made by [Fog Creek](https://fogcreek.com/)
--------------------
-
-\ ゜o゜)ノ
+Users can like other user posted images.

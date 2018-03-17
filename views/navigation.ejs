@@ -1,0 +1,35 @@
+<div class="w3-bar w3-teal w3-animate-top">
+  <a href="/" class="w3-bar-item w3-button w3-mobile">HomePage</a>
+ 
+  <% if (user) { %>
+  <nav class="floatRight">
+    <span class="w3-bar-item w3-mobile">Hello, <span style="color:#efef00;"><%= user %></span></span>
+    <a href="/addpic" class="w3-bar-item w3-button w3-mobile">Add Pic</a>
+    <a href="#" class="w3-bar-item w3-button w3-mobile">My Pics</a>
+
+    <a href="/api/logout" class="w3-bar-item w3-button w3-mobile">logout</a>
+  
+  <% } %>
+  <% if (!user) { %>
+  <nav class="floatRight">
+    <span class="w3-bar-item w3-mobile w3-small">Log in via any of these:</span> 
+    <a href="/auth/gh" class="w3-bar-item w3-button w3-mobile sign-in" data-hov-txt="sign in using GitHub">GitHub <i class="fab fa-github"></i></a>
+    <a href="/auth/google" class="w3-bar-item w3-button w3-mobile sign-in" alt="sign in using Google">Google <i class="fab fa-google"></i></a>
+    <a href="/auth/fb" class="w3-bar-item w3-button w3-mobile sign-in" alt="sign in using Google">Facebook <i class="fab fa-facebook"></i></a>
+    <a href="/auth/twitter" class="w3-bar-item w3-button w3-mobile sign-in" alt="sign in using Twitter">Twitter <i class="fab fa-twitter"></i></a>
+
+  <% } %>
+  </nav>
+</div>
+<div class="w3-bar w3-lime">
+  <span class="w3-bar-item w3-mobile">Select a section:</span>
+  <a href="/?sect=Food" class="w3-bar-item w3-button w3-mobile w3-red">Food</a>
+  <a href="/?sect=Photography" class="w3-bar-item w3-button w3-mobile w3-blue">Photography</a>
+  <a href="/?sect=Nature" class="w3-bar-item w3-button w3-mobile w3-green">Nature</a>
+  <a href="/?sect=Sport" class="w3-bar-item w3-button w3-mobile w3-purple">Sport</a>
+  <a href="/?sect=Funny" class="w3-bar-item w3-button w3-mobile w3-amber">Funny</a>
+  <a href="/?sect=Celebs" class="w3-bar-item w3-button w3-mobile w3-pink">Celebs</a>
+  <a href="/?sect=Random" class="w3-bar-item w3-button w3-mobile w3-brown">Random</a>
+  <a href="#" class="w3-bar-item w3-button w3-mobile">My Likes</a>  
+</div>
+

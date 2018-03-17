@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" -->
+  <title>Pixterest</title>
+  
+  <link rel="stylesheet prefetch" href="https://www.w3schools.com/w3css/4/w3.css"/>
+  <link rel="stylesheet prefetch" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
+  <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+  <body>
+    <%- include('navigation') %>
+<div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 30 }'>    
+<!--   <div class="grid-item grid-item--width2">
+    <div class="w3-panel w3-card-4">
+      <header class="w3-container w3-red top-rounded">
+        <i class="w3-xlarge fas fa-utensils floatRight"></i>
+        <h3>Some pin</h3>
+        
+      </header>
+
+      <section class="w3-leftbar w3-rightbar w3-border-red">
+      <img class="land" src="https://c1.staticflickr.com/5/4698/38644979220_893366835c_c.jpg" alt="food pic"/>
+      </section>
+
+      <footer class="w3-container w3-red bottom-rounded">
+        By FOODIE on DDMMYY
+        <i class="w3-large far fa-heart floatRight"></i> </footer>
+    </div>
+  </div>
+  <div class="grid-item">
+    <div class="w3-panel w3-card-2">
+      <header class="w3-container w3-blue top-rounded">
+        <i class="w3-xlarge fas fa-image floatRight"></i>
+        <h3>Some sign</h3>
+      </header>
+      <section class="border-blue">
+      <img class="port" src="https://c1.staticflickr.com/5/4761/40202657841_d43b995e1b_c.jpg"></section>
+      <footer class="w3-container w3-blue bottom-rounded">
+        By XXX on DDDD
+        <i class="w3-large fa fa-heart floatRight"></i>  </footer>
+    </div>
+  </div> -->
+  <% pix.forEach(function(pic){ %>
+  <div class="grid-item w3-animate-zoom <%= (pic.divItemStyle) %>">
+    <div class="w3-panel w3-card-4">
+      <header class="w3-container w3-<%= (pic.sectColour) %> top-rounded">
+        <i class="w3-large <%= (pic.sectIcon) %> floatRight"></i> 
+        <h3>
+          <%= (pic.imgDescription) %>
+        </h3>
+      </header>
+      <section class="w3-leftbar w3-rightbar w3-border-<%= (pic.sectColour) %> w3-sand">
+        <img class="<%= (pic.orientation) %>" src="<%= (pic.imgUrl) %>">
+      </section>
+      <footer class="w3-container w3-<%= (pic.sectColour) %> bottom-rounded">
+        By XYZ on <%= (pic.date) %>
+        <i class="w3-large far fa-heart floatRight"></i>
+      </footer>
+    </div>
+  </div>
+  <% }); %>
+<% if (pix.length === 0) { %>
+  <p class="w3-center w3-large">
+None found! <br/>
+    <i class="w3-jumbo fas fa-camera-retro"></i>    
+    <br/>
+    Sign in to add some
+  </p>
+    <% } %>
+    
+</div>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script> 
+</body>
+</html>

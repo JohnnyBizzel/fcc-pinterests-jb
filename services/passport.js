@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session');
 const User = mongoose.model('users');
 
 var os = require("os");
-console.log(os.hostname());
+//console.log(os.hostname());
 
 passport.serializeUser((user, done) => {
   done(null, user.id); // null is for errors *ie none*; user.id gets the mongodb id
@@ -30,10 +30,11 @@ passport.use(
       proxy: true
     }, (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }).then(existingUser => {
+        // console.log('found Google user', profile);
         if (existingUser) {
           return done(null, existingUser);
         } else {
-          new User({ googleId: profile.id }).save()
+          new User({ googleId: profile.id, displayName: profile.displayName }).save()
           .then(user => done(null, user));
         }
       });
@@ -53,11 +54,12 @@ passport.use(new TwitterStrategy({
     callbackURL: "/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
+  // console.log(profile);  
     User.findOne({ twitterId: profile.id }).then(existingUser => {
         if (existingUser) {
           return cb(null, existingUser);
         } else {
-          new User({ twitterId: profile.id }).save()
+          new User({ twitterId: profile.id, displayName: profile.displayName }).save()
           .then(user => cb(null, user));
         }
     });
@@ -70,11 +72,12 @@ passport.use(new FacebookStrategy({
     callbackURL: process.env.HOST + "/auth/fb/callback"
   },
   function(token, tokenSecret, profile, cb) {
+   // console.log(profile);
     User.findOne({ facebookId: profile.id }).then(existingUser => {
         if (existingUser) {
           return cb(null, existingUser);
         } else {
-          new User({ facebookId: profile.id }).save()
+          new User({ facebookId: profile.id, displayName: profile.displayName }).save()
           .then(user => cb(null, user));
         }
     });
@@ -90,10 +93,11 @@ passport.use(new GitHubStrategy({
   },
   function(token, tokenSecret, profile, cb) {
     User.findOne({ githubId: profile.id }).then(existingUser => {
+        // console.log(profile);      
         if (existingUser) {
           return cb(null, existingUser);
         } else {
-          new User({ githubId: profile.id }).save()
+          new User({ githubId: profile.id, displayName: profile.displayName }).save()
           .then(user => cb(null, user));
         }
     });

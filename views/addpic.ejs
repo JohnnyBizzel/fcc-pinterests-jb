@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" -->
+  <title>Pixterest</title>
+  
+<!--   <link rel="stylesheet prefetch" href="https://www.w3schools.com/w3css/4/w3.css"/> -->
+  
+<!--   <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/> -->
+  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css"/>
+  <link rel="stylesheet prefetch" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
+  <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+
+<body>
+ <div style="width: 100%; display: block; background-color: teal; height: 40px">
+   &emsp;
+  </div>
+
+<div class="container">
+  <div class="row">
+    
+  <h2 class="text-success">
+  Add a picture
+  </h2> </div>
+  <% if (errors) { %>
+  <div class="alert alert-warning">
+  <%= (errors.imgUrl) %><br/> <%= (errors.imgDescription) %> 
+  </div>
+  <% } %>
+  <div class="row">     
+    <section class="col col-xs-12">
+      <!-- class="sr-only" means Screen reader only-->
+     <!-- aria-hidden="true" hide from Screen readers -->
+      <form class="form-horizontal needs-validation" action="/addpic" method="post" novalidate>
+        <div id="fgLink" class="form-group has-feedback">
+          <label class="col col-sm-4 control-label inputHorizonalSuccess" for="inputLink">Link to picture <sup>*</sup></label>
+          <div class="col col-sm-8">
+            <input class="form-control <% if (errors && errors.imgUrl) { %> is-invalid <% } %>" type="text" id="inputLink" name="inputLink" placeholder="add URL" required aria-describedby="linkStatus">
+            <span id="errFeedbackClientLink" class="fas fa-times text-danger" style="display:none;" aria-hidden="true"></span>
+            <% if (errors && errors.imgUrl) { %>
+            <span id="errFeedback" class="fas fa-times text-danger" aria-hidden="true"></span>
+            <% } %>
+            
+            <span id="linkStatus" class="sr-only">(success)</span>
+          </div>
+        </div>
+        <div id="fgDesc" class="form-group has-feedback">
+          <label class="col col-sm-4 control-label" for="inputDesc">Description <sup>*</sup></label>
+          <div class="col col-sm-8">
+            <input type="text" id="inputDesc" name="inputDesc" placeholder="add a description"
+                   class="form-control <% if (errors && errors.imgDescription) { %> is-invalid<% } %>" required>
+            <span id="errFeedbackClientDesc" class="fas fa-times text-danger" style="display:none;" aria-hidden="true"></span>
+            <% if (errors && errors.imgDescription) { %>
+            <span id="errFeedback" class="fas fa-times text-danger" aria-hidden="true"></span>
+            <% } %>
+            <span id="descStatus" class="sr-only">(success)</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selectSite" class="col col-sm-4 control-label">Choose a section</label>
+          <div class="col col-sm-8">
+            <select id="selectSection" name="selectSection" class="form-control">
+              <option value="">Choose...</option>
+              <option>Food</option>
+              <option>Photography</option>
+              <option>Nature</option>
+              <option>Sport</option>
+              <option>Celebs</option>
+              <option>Funny</option>
+              <option>Random</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col col-sm-8 col-sm-offset-2">
+            <button class="btn btn-success" type="submit" id="btnSubmit" label="Save">Save</button>
+<!--           <input id="btnSubmit" type="submit" value="Save" class="btn btn-success"> -->
+          </div>
+        </div>
+        
+
+        <p style="font-size:0.8em; color:crimson;">         
+          * Required       
+        </p> 
+  
+      </form>
+
+
+    </section>
+  </div>
+  <!-- row -->
+</div>
+<!-- content container -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+  function checkDescription() {
+   var nam = $('#inputDesc').val();
+      if(nam == '') {
+        $('#inputDesc').addClass('is-invalid');
+        $('#inputDesc').removeClass('has-success');
+        $('#errFeedbackClientDesc').show();
+        return false; // invalid form
+      } else {
+        $('#inputDesc').removeClass('is-invalid');
+        $('#inputDesc').addClass('has-success');
+        $('#errFeedbackClientDesc').hide();
+        return true;
+      };
+  }
+  function validateLink(lk) {
+    var re = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+    return re.test(lk);
+  }
+
+  function checkLink() {
+    var linkEntered = $('#inputLink').val();
+        if(linkEntered == '' || !validateLink(linkEntered)) {
+          $('#inputLink').addClass('is-invalid');
+          $('#inputLink').removeClass('has-success');
+          $('#errFeedbackClientLink').show();
+          return false; // invalid
+        } else {
+          $('#inputLink').removeClass('is-invalid');
+          $('#inputLink').addClass('has-success');
+          $('#errFeedbackClientLink').hide();
+          return true;
+        };
+  }
+
+  $(document).ready(function() {
+     $('#btnSubmit').click(function(e) {
+       //e.preventDefault();
+       var valid = true;
+       valid = checkLink();
+       valid = checkDescription() && valid;
+        if (!checkLink() || !checkDescription()) e.preventDefault();
+     });           
+     $('#inputDesc').keyup(function() {
+        checkDescription();
+     }); 
+     $('#inputLink').keyup(function() {
+        checkLink();
+     }); 
+
+  });
+  </script>
+  </body>
+</html>
