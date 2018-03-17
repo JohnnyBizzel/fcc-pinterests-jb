@@ -4,6 +4,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
+var bodyParser = require('body-parser');
+
 require('./models/user');
 require('./services/passport');
 
@@ -19,22 +21,43 @@ app.use(cookieSession({
   keys: [process.env.COOKEE]
 }));
 
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
+// next one needed to read form post request body
+app.use(bodyParser.urlencoded({    
+  extended: true
+}));
+
+app.set('view engine', 'ejs');
 
 // http://expressjs.com/en/starter/static-files.html
+// anything in the public folder gets served as at the site root.
 app.use(express.static('public'));
+
+
 
 // const authRoutes = require('./routes/authRoutes');
 // authRoutes(app);
 // === ABOVE resovles to this because require is a module.
 require('./routes/authRoutes')(app);
 
-//console.log(process.env.SECRET);
+// app.get('/pix',  function(req, res){
+//   console.log(req.user)
+//   var nav = {};
+//   // check if logged in
+//   if (req.user) {
+//     res.render('index', { title: "hallo EJS", user: req.user.displayName, navig: nav }); 
+//   } else {
+//     res.render('index', { title: "hallo EJS", user: null, navig: nav }); 
+//   }
+         
+// });
 
-
+require('./routes/pixRoutes')(app);
 
 
 var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Pixterest is listening on port ' + listener.address().port);
 });

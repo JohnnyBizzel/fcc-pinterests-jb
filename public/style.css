@@ -1,16 +1,5 @@
-/* styles */
-/* called by your view template */
-
-/* You might want to try something fancier: */
-/* less: http://lesscss.org/ */
-
 * {
   box-sizing: border-box;
-}
-
-body {
-  font-family: helvetica, arial, sans-serif;
-  margin: 25px;
 }
 
 h1 {
@@ -18,65 +7,50 @@ h1 {
   color: pink;
 }
 
-.bold {
-  font-weight: bold;
+.grid-item { width: 262px; margin: 4px 4px }
+.grid-item--width2 { width: 500px; }
+.top-rounded {
+  border-radius: 16px 16px 0 0;
 }
-
-p {
-  max-width: 600px;
+.bottom-rounded {
+  border-radius: 0 0 16px 16px;
 }
-
-form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: cyan;
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 3px;
+i { margin: 4px 0;}
+sup { color: crimson; }
+img.land {
+  width: 472px;
+  height: auto;
 }
-
-input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
+img.port {
+  width: 234px;
+  height: auto;
 }
-
-button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
+img.square {
+  width: 234px;
+  height: auto;
 }
-
-button:hover {
-  background-color: yellow;
+.w3-card-4, .w3-card-2 { padding: 8px}
+/* .border-blue { 
+  border-left: 6px solid dodgerblue;
+  border-right: 6px solid dodgerblue;
+} */
+.floatRight {
+  float: right;
 }
-
-button:active {
-  box-shadow: none;
+#errFeedback, #errFeedbackClientLink, #errFeedbackClientDesc {
+  position: absolute;
+  right: 10px;
+  top:0;
+  z-index: 2;
+  display:block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
 }
+@media screen and (max-width: 600px) {
 
-li {
-  margin-bottom: 5px;
-}
+  .floatRight {
+    float: none;
+  }
 
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
-
-footer > a {
-  color: #BBBBBB;
-}
-
-.nicejob {
-  text-decoration: line-through;
 }

@@ -1,12 +1,21 @@
 const passport = require('passport');
 module.exports = (app) => {
 
+  function checkAuthentication(req,res,next){
+    if(req.isAuthenticated()){
+        //if user is looged in, req.isAuthenticated() will return true 
+        next();
+    } else{
+        res.redirect("/login");
+    }
+  }
+  
   // scope accesses specific details of the user's google acct.
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile','email']}));
 
   app.get('/auth/google/callback', passport.authenticate('google'),
            (req, res) => {
-              res.redirect('/pins');
+              res.redirect('/');
         });
   
    // Twitter access routes.
@@ -14,7 +23,7 @@ module.exports = (app) => {
 
   app.get('/auth/twitter/callback', passport.authenticate('twitter'),
            (req, res) => {
-              res.redirect('/pinst');
+              res.redirect('/');
         });
   
      // Facebook access routes.
@@ -22,7 +31,7 @@ module.exports = (app) => {
 
   app.get('/auth/fb/callback', passport.authenticate('facebook'),
            (req, res) => {
-              res.redirect('/pinsfb');
+              res.redirect('/');
         });
   
   // GitHub access routes.
@@ -30,12 +39,12 @@ module.exports = (app) => {
 
   app.get('/auth/gh/callback', passport.authenticate('github'),
            (req, res) => {
-              res.redirect('/pinsg');
+              res.redirect('/');
         });
   
   
   app.get('/api/logout', (req, res) => {
-    req.logout();
+    req.logout();        
     res.redirect('/');
   });
   
