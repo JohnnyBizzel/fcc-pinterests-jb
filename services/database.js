@@ -9,7 +9,9 @@ function continueWithSave(req, res, orient) {
   const newDoc = new Pix({ imgUrl: req.body.inputLink, 
               imgDescription: req.body.inputDesc.trim(),
               section: req.body.selectSection,
-              orientation: orient });
+              orientation: orient,
+              createdBy: req.user._id,
+              createdByName: req.user.displayName });
     
 
     newDoc.save((err) => {
@@ -26,6 +28,7 @@ function continueWithSave(req, res, orient) {
     });
 
 }
+
 module.exports = {
   // add picture
   addPicture: (req, res) => {
@@ -53,10 +56,7 @@ module.exports = {
           continueWithSave(req, res, imgOrient);
         });
       });    
-      
     } else {
-      
-
       http.get(options, function (response) {
         var chunks = [];
         response.on('data', function (chunk) {
@@ -72,9 +72,9 @@ module.exports = {
     }
 
   },
-  getPix: (param, callback) => {
+  getPix: (param, skipNum, takeNum, callback) => {
     // get all pictures (filtered)
-    Pix.find(param, (err, dataset) => {
+    Pix.find(param).sort({'createdAt': -1}).skip(skipNum).limit(takeNum).exec((err, dataset) => {
       if (err) {
         callback(err, null);
         return;

@@ -4,6 +4,7 @@
 <head>
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
   <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" -->
   <title>Pixterest</title>
@@ -47,9 +48,9 @@
   </div> -->
   <% pix.forEach(function(pic){ %>
   <div class="grid-item w3-animate-zoom <%= (pic.divItemStyle) %>">
-    <div class="w3-panel w3-card-4">
+    <article class="w3-panel w3-card-4">
       <header class="w3-container w3-<%= (pic.sectColour) %> top-rounded">
-        <i class="w3-large <%= (pic.sectIcon) %> floatRight"></i> 
+        <i class="w3-large <%= (pic.sectIcon) %> posAbsRight"></i> 
         <h3>
           <%= (pic.imgDescription) %>
         </h3>
@@ -57,11 +58,11 @@
       <section class="w3-leftbar w3-rightbar w3-border-<%= (pic.sectColour) %> w3-sand">
         <img class="<%= (pic.orientation) %>" src="<%= (pic.imgUrl) %>">
       </section>
-      <footer class="w3-container w3-<%= (pic.sectColour) %> bottom-rounded">
-        By XYZ on <%= (pic.date) %>
-        <i class="w3-large far fa-heart floatRight"></i>
+      <footer class="w3-container w3-<%= (pic.sectColour) %> bottom-rounded w3-small">
+        By <%= pic.createdByName %> on <%= (pic.date) %>
+        <a href="#"><i class="w3-large far fa-heart floatRight"></i></a>
       </footer>
-    </div>
+    </article>
   </div>
   <% }); %>
 <% if (pix.length === 0) { %>
