@@ -4,11 +4,13 @@ const testAuthorization = require("../services/authorization");
 
 module.exports = (app) => {
   app.get('/', function(req, res){
+    console.log(req.user);
     var section = req.query.sect;
     var filter = (section) ? { section: section } : {};
+    var skip = 0, limit = 10;
     
-    db.getPix(filter, (err, results) => {
-      // TODO set up images for displaying to the view
+    db.getPix(filter, skip, limit, (err, results) => {
+       // set up images for displaying to the view
        results.map((pic) => {
          pic.date = new Date(pic.createdAt).toLocaleDateString();
          switch (pic.orientation) {
@@ -60,6 +62,7 @@ module.exports = (app) => {
              break;
            default:
              pic.sectColour = 'brown';
+             pic.sectIcon = 'fas fa-random';
           }
        });     
       // check if logged in
@@ -81,7 +84,7 @@ module.exports = (app) => {
 
 
   app.post('/addpic',  function(req, res){ 
- 
+     console.log(req.user);
     // Save new pic in the db
     db.addPicture(req, res);
         

@@ -12,7 +12,7 @@ require('./services/passport');
 var dbUsr = process.env.MONGO_USR;
 var dbPwd = process.env.MONGO_PASS;
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${dbUsr}:${dbPwd}@ds251988.mlab.com:51988/pinterests`, { useMongoClient: true });
+mongoose.connect(`mongodb://${encodeURIComponent(dbUsr)}:${encodeURIComponent(dbPwd)}@ds251988.mlab.com:51988/pinterests`);
 console.log('Mongoose connection state=',mongoose.connection.readyState);
 var app = express();
 
@@ -43,17 +43,6 @@ app.use(express.static('public'));
 // === ABOVE resovles to this because require is a module.
 require('./routes/authRoutes')(app);
 
-// app.get('/pix',  function(req, res){
-//   console.log(req.user)
-//   var nav = {};
-//   // check if logged in
-//   if (req.user) {
-//     res.render('index', { title: "hallo EJS", user: req.user.displayName, navig: nav }); 
-//   } else {
-//     res.render('index', { title: "hallo EJS", user: null, navig: nav }); 
-//   }
-         
-// });
 
 require('./routes/pixRoutes')(app);
 

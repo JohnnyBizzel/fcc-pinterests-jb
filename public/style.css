@@ -37,6 +37,10 @@ img.square {
 .floatRight {
   float: right;
 }
+.posAbsRight {
+  position:absolute;
+  right: 15px;
+}
 #errFeedback, #errFeedbackClientLink, #errFeedbackClientDesc {
   position: absolute;
   right: 10px;
@@ -53,4 +57,9 @@ img.square {
     float: none;
   }
 
+  .grid-item--width2 { max-width: 360px; }
+  img.land {
+    max-width: 332px;
+    height: auto;
+  }
 }

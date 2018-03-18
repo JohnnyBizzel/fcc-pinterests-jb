@@ -7,8 +7,6 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const User = mongoose.model('users');
 
-var os = require("os");
-//console.log(os.hostname());
 
 passport.serializeUser((user, done) => {
   done(null, user.id); // null is for errors *ie none*; user.id gets the mongodb id
