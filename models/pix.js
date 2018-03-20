@@ -13,7 +13,7 @@ const picSchema = new Schema({
   imgDescription: { type: String, required: [true, 'Please add a description'] },
   section: { type: String, default: 'Random' },
   orientation: String, 
-  likedBy: Array,
+  likedBy: [{ type : Schema.Types.ObjectId, ref: 'users' }],
   createdBy: {type: Schema.Types.ObjectId, ref: 'users'},
   createdByName: String,
   createdAt: { type: Date, default: Date.now }
