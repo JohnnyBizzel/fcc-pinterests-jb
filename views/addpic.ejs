@@ -18,7 +18,7 @@
 
 <body>
  <div style="width: 100%; display: block; background-color: teal; height: 40px">
-   &emsp;
+   &emsp;<a href="/" class="w3-xxxlarge floatRight text-white">Back <i class="w3-xxlarge fas fa-times-circle"></i></a>
   </div>
 
 <div class="container">
@@ -34,7 +34,11 @@
   </div>
   <% if (errors) { %>
   <div class="alert alert-warning">
-  <%= (errors.imgUrl) %><br/> <%= (errors.imgDescription) %> 
+    <%= (errors.imgUrl) %>
+    <% if (errors.imgUrl) { %> 
+    <br/>
+    <% } %>
+    <%= (errors.imgDescription) %> 
   </div>
   <% } %>
   <div class="row">     
@@ -71,7 +75,8 @@
           <label for="selectSite" class="col col-sm-4 control-label">Choose a section</label>
           <div class="col col-sm-8">
             <select id="selectSection" name="selectSection" class="form-control">
-              <option value="">Choose...</option>
+              <option value="Random">Choose...</option>
+              <option>Art</option>
               <option>Food</option>
               <option>Photography</option>
               <option>Nature</option>

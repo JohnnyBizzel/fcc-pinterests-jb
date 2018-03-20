@@ -1,13 +1,13 @@
 <div class="w3-bar w3-teal w3-animate-top">
-  <a href="/" class="w3-bar-item w3-button w3-mobile">HomePage</a>
+  <a href="/" id="homelink" class="w3-bar-item w3-button w3-mobile"><span class="highlight">Pix</span>terest!</a>
  
   <% if (user) { %>
   <nav class="floatRight">
-    <span class="w3-bar-item w3-mobile">Hello, <span style="color:#efef00;"><%= user %></span></span>
+    <span class="w3-bar-item w3-mobile">Hello, <span style="color:#efef00;"><%= user.name %></span></span>
     <a href="/addpic" class="w3-bar-item w3-button w3-mobile">Add Pic</a>
-    <a href="#" class="w3-bar-item w3-button w3-mobile">My Pics</a>
-
-    <a href="/api/logout" class="w3-bar-item w3-button w3-mobile">logout</a>
+    <a href="/?mine=1" class="w3-bar-item w3-button w3-mobile">My Pics</a>
+    <a href="/?likes=1" class="w3-bar-item w3-button w3-mobile">My Likes</a>  
+    <a href="/api/logout" class="w3-bar-item w3-button w3-mobile">log out&nbsp;<i class="fas fa-sign-out-alt"></i></a>
   
   <% } %>
   <% if (!user) { %>
@@ -22,7 +22,9 @@
   </nav>
 </div>
 <div class="w3-bar w3-lime">
+  
   <span class="w3-bar-item w3-mobile">Select a section:</span>
+  <a href="/?sect=Art" class="w3-bar-item w3-button w3-mobile w3-khaki">Art</a>
   <a href="/?sect=Food" class="w3-bar-item w3-button w3-mobile w3-red">Food</a>
   <a href="/?sect=Photography" class="w3-bar-item w3-button w3-mobile w3-blue">Photography</a>
   <a href="/?sect=Nature" class="w3-bar-item w3-button w3-mobile w3-green">Nature</a>
@@ -30,6 +32,6 @@
   <a href="/?sect=Funny" class="w3-bar-item w3-button w3-mobile w3-amber">Funny</a>
   <a href="/?sect=Celebs" class="w3-bar-item w3-button w3-mobile w3-pink">Celebs</a>
   <a href="/?sect=Random" class="w3-bar-item w3-button w3-mobile w3-brown">Random</a>
-  <a href="#" class="w3-bar-item w3-button w3-mobile">My Likes</a>  
+  <a href="/" class="w3-bar-item w3-button w3-mobile">Show all</a>
 </div>
 
