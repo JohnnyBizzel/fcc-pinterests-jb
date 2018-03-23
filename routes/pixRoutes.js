@@ -10,10 +10,12 @@ module.exports = (app) => {
     var section = req.query.sect;
     //console.log(section);
     var filter = (section) ? { section: section } : {};
-    var skip = 0, limit = 8;
+    var skip = 0, limit = 10;
     
     if (req.query.next)  { 
-      skip += Number(req.query.next) + 8;
+      skip += Number(req.query.next);
+    } else {
+      skip = 0;
     }
     if (myPics) {
       
@@ -101,6 +103,15 @@ module.exports = (app) => {
        });
       
       console.log('images for the view ', count);
+      let pages = Math.round(count / limit);
+      console.log(pages);
+      let pageArray = [];
+      while (pages > -1) {
+        console.log(pages);
+        pageArray.unshift(10*pages);
+        pages = pages -1;
+      }
+      console.log(pageArray);
       // check if logged in
       if (req.user) {         
         res.render('index', { title: "Welcome to Pixterest", 
@@ -109,6 +120,7 @@ module.exports = (app) => {
                              skipping: newSkip, 
                              count: count,
                              section: filter,
+                             pages: pageArray,
                              myPix: filter.hasOwnProperty('createdBy') }); 
       } else {         
         res.render('index', { title: "Welcome to Pixterest", 
@@ -117,6 +129,7 @@ module.exports = (app) => {
                              skipping: newSkip,
                              count: count,
                              section: filter,
+                             pages: pageArray,
                              myPix: filter.hasOwnProperty('createdBy') }); 
       }
 

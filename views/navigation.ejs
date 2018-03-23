@@ -1,4 +1,4 @@
-<div class="w3-bar w3-teal w3-animate-top">
+<div class="w3-bar w3-teal">
   <a href="/" id="homelink" class="w3-bar-item w3-button w3-mobile"><span class="highlight">Pix</span>terest!</a>
  
   <% if (user) { %>
@@ -12,7 +12,7 @@
   <% } %>
   <% if (!user) { %>
   <nav class="floatRight">
-    <span class="w3-bar-item w3-mobile w3-small">Log in via any of these:</span> 
+    <span class="w3-bar-item w3-mobile w3-small">To add pics, log in via:</span> 
     <a href="/auth/gh" class="w3-bar-item w3-button w3-mobile sign-in" data-hov-txt="sign in using GitHub">GitHub <i class="fab fa-github"></i></a>
     <a href="/auth/google" class="w3-bar-item w3-button w3-mobile sign-in" alt="sign in using Google">Google <i class="fab fa-google"></i></a>
     <a href="/auth/fb" class="w3-bar-item w3-button w3-mobile sign-in" alt="sign in using Google">Facebook <i class="fab fa-facebook"></i></a>
@@ -24,14 +24,22 @@
 <div class="w3-bar w3-lime">
   
   <span class="w3-bar-item w3-mobile">Select a section:</span>
-  <a href="/?sect=Art" class="w3-bar-item w3-button w3-mobile w3-khaki">Art</a>
-  <a href="/?sect=Food" class="w3-bar-item w3-button w3-mobile w3-red">Food</a>
-  <a href="/?sect=Photography" class="w3-bar-item w3-button w3-mobile w3-blue">Photography</a>
-  <a href="/?sect=Nature" class="w3-bar-item w3-button w3-mobile w3-green">Nature</a>
-  <a href="/?sect=Sport" class="w3-bar-item w3-button w3-mobile w3-purple">Sport</a>
-  <a href="/?sect=Funny" class="w3-bar-item w3-button w3-mobile w3-amber">Funny</a>
-  <a href="/?sect=Celebs" class="w3-bar-item w3-button w3-mobile w3-pink">Celebs</a>
-  <a href="/?sect=Random" class="w3-bar-item w3-button w3-mobile w3-brown">Random</a>
+  <a href="/?sect=Art" class="w3-bar-item w3-button w3-mobile w3-khaki">
+    <i class="fas fa-paint-brush" aria-hidden="true"></i> Art</a>
+  <a href="/?sect=Food" class="w3-bar-item w3-button w3-mobile w3-red">
+    <i class="fas fa-utensils" aria-hidden="true"></i> Food</a>
+  <a href="/?sect=Photography" class="w3-bar-item w3-button w3-mobile w3-blue">
+    <i class="fas fa-image" aria-hidden="true"></i> Photography</a>
+  <a href="/?sect=Nature" class="w3-bar-item w3-button w3-mobile w3-green">
+    <i class="fab fa-pagelines" aria-hidden="true"></i> Nature</a>
+  <a href="/?sect=Sport" class="w3-bar-item w3-button w3-mobile w3-purple">
+    <i class="fas fa-football-ball" aria-hidden="true"></i> Sport</a>
+  <a href="/?sect=Funny" class="w3-bar-item w3-button w3-mobile w3-amber">
+    <i class="far fa-smile" aria-hidden="true"></i> Funny</a>
+  <a href="/?sect=Celebs" class="w3-bar-item w3-button w3-mobile w3-pink">
+    <i class="fas fa-star" aria-hidden="true"></i> Celebs</a>
+  <a href="/?sect=Random" class="w3-bar-item w3-button w3-mobile w3-brown">
+    <i class="fas fa-random" aria-hidden="true"></i> Random</a>
   <a href="/" class="w3-bar-item w3-button w3-mobile">Show all</a>
 </div>
 

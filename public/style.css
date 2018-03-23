@@ -44,6 +44,7 @@ color:yellow;
   color:red;
 }
 #footer {
+  
    position:fixed;
    left:0px;
    bottom: 0;
@@ -52,8 +53,17 @@ color:yellow;
    text-align: center;
    transition: bottom 0.2s ease;
 }
+#footer #more-detail {
+	position: relative;
+	background:#e0e0e0;
+	display: none;
+	margin-top: 7px;
+	height: 45px;
+}
 #more-lnk {
 	position: fixed;
+  float:left;
+  left: 20px;
 	bottom: 0;
 	text-decoration: none;
 	border-radius: 50% 50%;
@@ -65,25 +75,26 @@ color:yellow;
 	display: block;
 	z-index: 777;
 }
-#footer #more-detail {
-	position: relative;
-	background:#e0e0e0;
-	display: none;
-	margin-top: 7px;
-	height: 45px;
+#more-lnk:hover {
+ text-shadow: 0 0 12px gainsboro;
+} 
+
+#imgContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-.w3-card-4, .w3-card-2 { padding: 8px}
-/* .border-blue { 
-  border-left: 6px solid dodgerblue;
-  border-right: 6px solid dodgerblue;
-} */
-.floatRight {
+/* override for W3css class: */
+.w3-panel {
+   padding: 0px;
+   border-radius: 16px;
+  box-shadow: 6px 6px 16px #777;
+}
+
+.floatRight {  
   float: right;
 }
-.posAbsRight {
-  position:absolute;
-  right: 15px;
-}
+
 .modal-overlay {
   z-index: 1000;
   position: fixed;
@@ -134,4 +145,10 @@ color:yellow;
     max-width: 100%;
     height: auto;
   }
+}
+
+@media screen and (min-width: 1281px) {
+
+.grid-item { width: 14%; margin: 2px 1px }
+  .grid-item--width2 { width: 24%; }
 }

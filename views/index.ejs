@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
-  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://cdn.glitch.com/86a293b8-e293-4984-a74d-21a8f1e16fb5%2Ffavicon.png?1521573431819" />
+<!--   <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" --> 
   <title>Pixterest</title>
   
   <link rel="stylesheet prefetch" href="https://www.w3schools.com/w3css/4/w3.css"/>
@@ -14,19 +14,20 @@
 </head>
   <body>
     <%- include('navigation') %>
-<div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 20 }'>    
+<!--     data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 20 }' -->
+<div id="imgContainer" class="grid" >    
 
   <% pix.forEach(function(pic){ %>
-  <div class="grid-item <%= (pic.divItemStyle) %>">
-    <article class="w3-panel w3-card-4">
+  <div class="grid-item w3-animate-zoom <%= (pic.divItemStyle) %>">
+    <article class="w3-panel">
       <header class="w3-container w3-<%= (pic.sectColour) %> top-rounded">
-        <i class="w3-large <%= (pic.sectIcon) %> posAbsRight"></i> 
+        <i class="w3-large <%= (pic.sectIcon) %> floatRight"></i> 
         <h3>
           <%= (pic.imgDescription) %>
         </h3>
       </header>
       <section class="w3-leftbar w3-rightbar w3-border-<%= (pic.sectColour) %> w3-sand">
-        <img class="<%= (pic.orientation) %>" src="<%= (pic.imgUrl) %>">
+        <img class="<%= (pic.orientation) %> lazyload" src="<%= (pic.imgUrl) %>">
       </section>
       <footer class="w3-container w3-<%= (pic.sectColour) %> bottom-rounded w3-small">
         By <%= pic.createdByName %> on <%= (pic.date) %>
@@ -54,7 +55,7 @@
             <div class="modal-overlay hide" id="modal-overlay-<%= (pic._id) %>"></div>
 
         <% }; %>
-
+         <% if (user) { %>
         <a href="/like?pic_id=<%= pic._id %>"> 
           <% if (pic.like) { %>
           <i class="w3-large fas fa-heart" aria-hidden="true"></i>
@@ -62,6 +63,9 @@
           <i class="w3-large far fa-heart" aria-hidden="true"></i>
           <% }; %>
         </a>
+          <% } else { %>
+          <i class="w3-large far fa-heart" aria-hidden="true"></i>
+          <% }; %>
         </span>
       </footer>
     </article>
@@ -75,58 +79,26 @@ None found! <br/>
     Sign in to add some
   </p>
   </div>
-    <% } else if (count > 8) { %>
+    <% } else if (count > 10) { %>
 </div>
 
-  <div class="w3-center w3-xxlarge">
+  <div class="w3-center w3-xxlarge w3-round">
      <% if (!myPix) { %>
+    
+        <% pages.forEach( function (page, index)  { %>
+    
+          <a href="/?next=<%= page %>&sect=<%= section.section %>" 
+               class="w3-button w3-small w3-mobile <% if (page == skipping) { %>w3-blue <% } else { %>w3-black<% } %>">
+                <%= index+1 %>
+          </a>
       
-        <a href="/?next=<%= skipping %>&sect=<%= section.section %>" class="w3-button w3-circle w3-black">
-         <i class="fas fa-chevron-down w3-text-white" aria-hidden="true"></i>      
-        </a>
-      
-    <% } %>
+        <% }); %>
+      <% } %>
   </div>
     <% }; %>
   
-  <a href="#" id="more-lnk" class="fa fa-info-circle fa-2x" onclick="showDetail()">&nbsp;</a>
-    <footer id="footer">
-    <div id="more-detail">
-      <a href="/privacy" class="floatRight w3-text-blue">Privacy policy</a>
-      <div style="position:absolute; float: left; left: 12px;">
-        <a href="#" id="hide" onclick="hideDetail()"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
-      </div>
-      
-      Coded by: <a href="https://www.freecodecamp.org/johnnybizzel">Johnny Bizzel</a> @
-      <img src="https://d33wubrfki0l68.cloudfront.net/4ba4ee4d1ac4caf5c0c3fa44ccc8fddd5bd11222/3f5b1/img/freecodecamp-alternative.png" 
-      style="width: 180px">
-
-    </div>
-  </footer>
-
-  <script>
-    // Checks for any broken images and replaces them with a placeholder image.
-  var sPathToDefaultImg = 'https://cdn.glitch.com/86a293b8-e293-4984-a74d-21a8f1e16fb5%2Fswirl-nf.png?1521478502122',
-    validateImage = function( domImg ) {
-        oImg = new Image();
-        oImg.onerror = function() {
-            domImg.src = sPathToDefaultImg;
-          domImg.classList.remove("land");
-          domImg.classList.add("port");
-          var container = domImg.parentElement.parentElement.parentElement;
-          container.classList.remove("grid-item--width2");
-          var msnry = new Masonry( '.grid', {"itemSelector": ".grid-item", "columnWidth": 20});
-          msnry.reloadItems();
-        };
-        oImg.src = domImg.src;
-    },
-    aImg = document.getElementsByTagName( 'img' ),
-    i = aImg.length;
-
-  while ( i-- ) {
-    validateImage( aImg[i] );
-  }
-  </script>
+<%- include('footer') %>
+  
   <script>
   // show-hide modal for confirm delete
   function hideModal(id) {
@@ -156,7 +128,48 @@ None found! <br/>
     document.getElementById('more-lnk').style.display = 'block';
     document.getElementById('more-detail').style.display = 'none';
   }
+    
+
   </script>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script> 
+<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.1/lazyload.js"></script>
+  <script>
+    // lazy load images
+    lazyload();
+    // Checks for any broken images and replaces them with a placeholder image.
+  var sPathToDefaultImg = 'https://cdn.glitch.com/86a293b8-e293-4984-a74d-21a8f1e16fb5%2Fswirl-nf.png?1521478502122',
+    validateImage = function( domImg ) {
+        oImg = new Image();
+        oImg.onerror = function() {
+            domImg.src = sPathToDefaultImg;
+          domImg.classList.remove("land");
+          domImg.classList.add("port");
+          var container = domImg.parentElement.parentElement.parentElement;
+          container.classList.remove("grid-item--width2");
+          // var msnry = new Masonry( '.grid', {"itemSelector": ".grid-item", "columnWidth": 20});
+          // msnry.reloadItems();
+        };
+        oImg.src = domImg.src;
+    },
+    aImg = document.getElementsByTagName( 'img' ),
+    i = aImg.length;
+
+  while ( i-- ) {
+    validateImage( aImg[i] );
+
+  }
+    // var msnry = new Masonry( '.grid', {"itemSelector": ".grid-item", "columnWidth": 20});
+    //       msnry.reloadItems();
+    // https://imagesloaded.desandro.com/ 
+//     // FIX for overlapping images
+//   var $container = document.getElementById('imgContainer');
+
+//   // initialize Masonry after all images have loaded  
+//   $container.imagesLoaded( function() {
+//     alert('test');
+//        $container.masonry();
+//   });
+  </script>
 </body>
 </html>
